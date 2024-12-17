@@ -1,1 +1,19 @@
-# priority-selections
+(""" priority-selections
+    
+        kişiler
+            binalar
+                ekipler
+
+
+
+
+
+
+
+
+
+
+
+
+
+ """)
