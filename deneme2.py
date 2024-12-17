@@ -1,3 +1,4 @@
+import pandas as pd
 import numpy as np
 import random
 
@@ -70,4 +71,5 @@ test_results = [{"Durum (Puan)": state, "Atanan Ekip": assign_team(state)} for s
 # Sonuçları DataFrame olarak gösterme
 df_test_results = pd.DataFrame(test_results)
 
-tools.display_dataframe_to_user("Q-Learning Test Sonuçları", df_test_results)
+# DataFrame'i ekrana yazdırma
+print(df_test_results)
