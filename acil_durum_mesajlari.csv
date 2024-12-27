@@ -1,0 +1,101 @@
+mesaj_id,gönderen_rol,acil_durum_mesajı,konum,tarih_saat
+1,AFAD Personeli,"15 göçük altında vaka, 8 ezilme sendromu vakası tespit edildi. Acil kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Metropol AVM,2024-01-15 08:30
+2,Saha Doktoru,"12 kapalı kırık, 25 hafif yaralı var. Acil tıbbi malzeme ihtiyacı.",İstanbul/Şişli/İş Kuleleri,2024-01-15 08:45
+3,Acil Tıp Teknisyeni,"4 kafatası travması, 6 iç kanama vakası mevcut. Acil kan ihtiyacı var.",İstanbul/Bakırköy/Devlet Hastanesi,2024-01-15 09:00
+4,UMKE Personeli,"18 omurga yaralanması, 5 göğüs travması vakası var. Transport sedye gerekli.",İstanbul/Beşiktaş/Anadolu Lisesi,2024-01-15 09:15
+5,Hemşire,"10 crush sendromu vakası tespit edildi. Acil diyaliz ünitesi ihtiyacı var.",İstanbul/Üsküdar/Çarşı Metro İstasyonu,2024-01-15 09:30
+6,AFAD Personeli,"30 kişi asansörde mahsur kaldı. Kesme ekipmanı ve jeneratör gerekli.",İstanbul/Şişli/Plaza Binası,2024-01-15 09:45
+7,Saha Doktoru,"20 multiple travma vakası var. Cerrahi malzeme ve kan ürünü ihtiyacı.",İstanbul/Kadıköy/Özel Hastane,2024-01-15 10:00
+8,Acil Tıp Teknisyeni,"5 solunum durması, 8 kardiyak arrest vakası var. Defibrilatör gerekli.",İstanbul/Bakırköy/Alışveriş Merkezi,2024-01-15 10:15
+9,UMKE Personeli,"12 çoklu organ travması vakası. Acil ameliyathane ihtiyacı var.",İstanbul/Beşiktaş/Rezidans,2024-01-15 10:30
+10,Hemşire,"15 açık kırık vakası tespit edildi. Ortopedik malzeme gerekli.",İstanbul/Üsküdar/Site Kompleksi,2024-01-15 10:45
+11,AFAD Personeli,"45 kişi 15 katlı binada mahsur. Vinç ve kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Residence Tower,2024-01-15 11:00
+12,Saha Doktoru,"18 kafa travması vakası mevcut. Nöroşirürji ekipmanı gerekli.",İstanbul/Şişli/İş Merkezi,2024-01-15 11:15
+13,Acil Tıp Teknisyeni,"25 ezilme vakası var. Acil crush sendromu tedavi ünitesi gerekli.",İstanbul/Bakırköy/Toplu Konut,2024-01-15 11:30
+14,UMKE Personeli,"6 yanık vakası, 10 solunum sıkıntısı mevcut. Oksijen tüpü gerekli.",İstanbul/Beşiktaş/Ofis Binası,2024-01-15 11:45
+15,Hemşire,"30 kişi enkaz altında tespit edildi. Termal kamera ihtiyacı var.",İstanbul/Üsküdar/Apartman Kompleksi,2024-01-15 12:00
+16,AFAD Personeli,"20 kişi çöken okul binasında mahsur. Dinleme cihazı gerekli.",İstanbul/Kadıköy/İlköğretim Okulu,2024-01-15 12:15
+17,Saha Doktoru,"14 şok vakası, 8 iç kanama mevcut. Acil kan ve serum gerekli.",İstanbul/Şişli/Özel Hastane,2024-01-15 12:30
+18,Acil Tıp Teknisyeni,"10 travmatik amputasyon vakası var. Cerrahi ekipman gerekli.",İstanbul/Bakırköy/İş Merkezi,2024-01-15 12:45
+19,UMKE Personeli,"22 kişi asma katta mahsur. Kurtarma ekipmanı ihtiyacı var.",İstanbul/Beşiktaş/Alışveriş Merkezi,2024-01-15 13:00
+20,Hemşire,"16 hipotermik vaka tespit edildi. Isıtıcı battaniye gerekli.",İstanbul/Üsküdar/Öğrenci Yurdu,2024-01-15 13:15
+21,AFAD Personeli,"35 kişi otopark katında mahsur. Havalandırma ekipmanı gerekli.",İstanbul/Kadıköy/AVM Otoparkı,2024-01-15 13:30
+22,Saha Doktoru,"28 multiple travma vakası var. Acil cerrahi malzeme ihtiyacı.",İstanbul/Şişli/Rezidans,2024-01-15 13:45
+23,Acil Tıp Teknisyeni,"12 crush sendromu vakası tespit edildi. Diyaliz cihazı gerekli.",İstanbul/Bakırköy/Plaza,2024-01-15 14:00
+24,UMKE Personeli,"8 kafatası travması, 15 kırık vakası var. Stabilizasyon ekipmanı gerekli.",İstanbul/Beşiktaş/Üniversite Binası,2024-01-15 14:15
+25,Hemşire,"20 kişi enkaz altından ses veriyor. Kurtarma ekibi takviyesi gerekli.",İstanbul/Üsküdar/Tarihi Bina,2024-01-15 14:30
+26,AFAD Personeli,"40 kişi çöken AVM'de mahsur. Ağır kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Büyük AVM,2024-01-15 14:45
+27,Saha Doktoru,"15 ağır yaralı, 30 hafif yaralı var. Acil tıbbi malzeme gerekli.",İstanbul/Şişli/Gökdelen,2024-01-15 15:00
+28,Acil Tıp Teknisyeni,"10 solunum durması vakası var. Entübasyon seti gerekli.",İstanbul/Bakırköy/Hastane,2024-01-15 15:15
+29,UMKE Personeli,"25 kişi asansörde mahsur. Teknik ekipman ihtiyacı var.",İstanbul/Beşiktaş/İş Merkezi,2024-01-15 15:30
+30,Hemşire,"18 crush sendromu vakası tespit edildi. Acil tıbbi müdahale gerekli.",İstanbul/Üsküdar/Konut Sitesi,2024-01-15 15:45
+31,AFAD Personeli,"50 kişi 20 katlı binada mahsur. Vinç ve platform gerekli.",İstanbul/Kadıköy/Gökdelen,2024-01-15 16:00
+32,Saha Doktoru,"22 travmatik yaralanma vakası var. Cerrahi ekipman gerekli.",İstanbul/Şişli/Hastane,2024-01-15 16:15
+33,Acil Tıp Teknisyeni,"15 iç kanama vakası mevcut. Acil kan ürünü ihtiyacı var.",İstanbul/Bakırköy/Tıp Merkezi,2024-01-15 16:30
+34,UMKE Personeli,"30 kişi çöken sınıfta mahsur. Kurtarma ekibi takviyesi gerekli.",İstanbul/Beşiktaş/Lise Binası,2024-01-15 16:45
+35,Hemşire,"12 ağır yaralı çocuk var. Pediatrik acil malzeme gerekli.",İstanbul/Üsküdar/İlkokul,2024-01-15 17:00
+36,AFAD Personeli,"28 kişi metro istasyonunda mahsur. Jeneratör ve aydınlatma gerekli.",İstanbul/Kadıköy/Metro İstasyonu,2024-01-15 17:15
+37,Saha Doktoru,"16 kafa travması vakası var. Nörolojik acil müdahale gerekli.",İstanbul/Şişli/Tıp Merkezi,2024-01-15 17:30
+38,Acil Tıp Teknisyeni,"20 ezilme sendromu vakası tespit edildi. Acil diyaliz gerekli.",İstanbul/Bakırköy/Site,2024-01-15 17:45
+39,UMKE Personeli,"35 kişi çöken spor salonunda mahsur. Kurtarma ekipmanı gerekli.",İstanbul/Beşiktaş/Spor Kompleksi,2024-01-15 18:00
+40,Hemşire,"25 multiple travma vakası var. Acil cerrahi müdahale gerekli.",İstanbul/Üsküdar/Hastane,2024-01-15 18:15
+41,AFAD Personeli,"42 kişi alışveriş merkezinde mahsur. Ağır kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Büyük AVM,2024-01-15 18:30
+42,Saha Doktoru,"30 crush sendromu vakası tespit edildi. Acil diyaliz gerekli.",İstanbul/Şişli/Hastane,2024-01-15 18:45
+43,Acil Tıp Teknisyeni,"18 kardiyak arrest vakası var. Defibrilatör ve ilaç gerekli.",İstanbul/Bakırköy/Sağlık Merkezi,2024-01-15 19:00
+44,UMKE Personeli,"45 kişi ofis binasında mahsur. Kurtarma ekibi takviyesi gerekli.",İstanbul/Beşiktaş/Plaza,2024-01-15 19:15
+45,Hemşire,"15 çocuk kreş binasında mahsur. Pediatrik kurtarma ekibi gerekli.",İstanbul/Üsküdar/Kreş,2024-01-15 19:30
+46,AFAD Personeli,"32 kişi rezidansta mahsur. Yüksek irtifa kurtarma ekibi gerekli.",İstanbul/Kadıköy/Lüks Rezidans,2024-01-15 19:45
+47,Saha Doktoru,"24 travmatik beyin hasarı vakası var. Nöroşirürji ekipmanı gerekli.",İstanbul/Şişli/Özel Hastane,2024-01-15 20:00
+48,Acil Tıp Teknisyeni,"28 multiple organ travması vakası mevcut. Acil cerrahi gerekli.",İstanbul/Bakırköy/Hastane,2024-01-15 20:15
+49,UMKE Personeli,"38 kişi kongre merkezinde mahsur. Kurtarma ekipmanı gerekli.",İstanbul/Beşiktaş/Kongre Merkezi,2024-01-15 20:30
+50,Hemşire,"20 ağır yaralı öğrenci var. Acil tıbbi müdahale gerekli.",İstanbul/Üsküdar/Kolej,2024-01-15 20:45
+51,AFAD Personeli,"48 kişi otel binasında mahsur. Yüksek irtifa kurtarma gerekli.",İstanbul/Kadıköy/Otel,2024-01-15 21:00
+52,Saha Doktoru,"22 crush sendromu vakası var. Acil diyaliz ünitesi gerekli.",İstanbul/Şişli/Sağlık Merkezi,2024-01-15 21:15
+53,Acil Tıp Teknisyeni,"16 kardiyopulmoner arrest vakası mevcut. Resüsitasyon gerekli.",İstanbul/Bakırköy/Acil Merkezi,2024-01-15 21:30
+54,UMKE Personeli,"42 kişi üniversite binasında mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Üniversite,2024-01-15 21:45
+55,Hemşire,"26 travmatik amputasyon vakası var. Acil cerrahi müdahale gerekli.",İstanbul/Üsküdar/Tıp Merkezi,2024-01-15 22:00
+56,AFAD Personeli,"36 kişi iş merkezinde mahsur. Ağır kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/İş Merkezi,2024-01-15 22:15
+57,Saha Doktoru,"32 multiple travma vakası tespit edildi. Acil cerrahi gerekli.",İstanbul/Şişli/Acil Servis,2024-01-15 22:30
+58,Acil Tıp Teknisyeni,"24 kafa travması vakası var. Nörolojik müdahale gerekli.",İstanbul/Bakırköy/Hastane,2024-01-15 22:45
+59,UMKE Personeli,"44 kişi alışveriş merkezinde mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/AVM,2024-01-15 23:00
+60,Hemşire,"28 crush sendromu vakası mevcut. Acil diyaliz gerekli.",İstanbul/Üsküdar/Hastane,2024-01-15 23:15
+61,AFAD Personeli,"52 kişi gökdelende mahsur. Yüksek irtifa kurtarma gerekli.",İstanbul/Kadıköy/Gökdelen,2024-01-15 23:30
+62,Saha Doktoru,"34 travmatik yaralanma vakası var. Acil cerrahi gerekli.",İstanbul/Şişli/Hastane,2024-01-15 23:45
+63,Acil Tıp Teknisyeni,"18 kardiyak arrest vakası mevcut. Acil müdahale gerekli.",İstanbul/Bakırköy/Acil Servis,2024-01-16 00:00
+64,UMKE Personeli,"46 kişi okul binasında mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Okul,2024-01-16 00:15
+65,Hemşire,"30 multiple organ travması vakası var. Acil cerrahi gerekli.",İstanbul/Üsküdar/Hastane,2024-01-16 00:30
+66,AFAD Personeli,"40 kişi rezidansta mahsur. Kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Rezidans,2024-01-16 00:45
+67,Saha Doktoru,"16 crush sendromu vakası tespit edildi. Acil diyaliz gerekli.",İstanbul/Şişli/Tıp Merkezi,2024-01-16 01:00
+68,Acil Tıp Teknisyeni,"22 travmatik beyin hasarı vakası var. Nöroşirürji gerekli.",İstanbul/Bakırköy/Hastane,2024-01-16 01:15
+69,UMKE Personeli,"48 kişi iş merkezinde mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Plaza,2024-01-16 01:30
+70,Hemşire,"32 multiple travma vakası mevcut. Acil cerrahi gerekli.",İstanbul/Üsküdar/Sağlık Merkezi,2024-01-16 01:45
+71,AFAD Personeli,"54 kişi AVM'de mahsur. Ağır kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/AVM,2024-01-16 02:00
+72,Saha Doktoru,"28 ezilme sendromu vakası var. Acil diyaliz gerekli.",İstanbul/Şişli/Hastane,2024-01-16 02:15
+73,Acil Tıp Teknisyeni,"26 kardiyopulmoner arrest vakası mevcut. Resüsitasyon gerekli.",İstanbul/Bakırköy/Acil Merkezi,2024-01-16 02:30
+74,UMKE Personeli,"50 kişi otel binasında mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Otel,2024-01-16 02:45
+75,Hemşire,"34 travmatik amputasyon vakası var. Acil cerrahi müdahale gerekli.",İstanbul/Üsküdar/Hastane,2024-01-16 03:00
+76,AFAD Personeli,"44 kişi kongre merkezinde mahsur. Kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Kongre Merkezi,2024-01-16 03:15
+77,Saha Doktoru,"40 multiple travma vakası tespit edildi. Acil cerrahi gerekli.",İstanbul/Şişli/Acil Servis,2024-01-16 03:30
+78,Acil Tıp Teknisyeni,"28 kafa travması vakası var. Nörolojik müdahale gerekli.",İstanbul/Bakırköy/Hastane,2024-01-16 03:45
+79,UMKE Personeli,"52 kişi üniversitede mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Üniversite,2024-01-16 04:00
+80,Hemşire,"11 crush sendromu vakası mevcut. Acil diyaliz gerekli.",İstanbul/Üsküdar/Tıp Merkezi,2024-01-16 04:15
+81,AFAD Personeli,"56 kişi gökdelende mahsur. Yüksek irtifa kurtarma gerekli.",İstanbul/Kadıköy/Gökdelen,2024-01-16 04:30
+82,Saha Doktoru,"42 travmatik yaralanma vakası var. Acil cerrahi gerekli.",İstanbul/Şişli/Hastane,2024-01-16 04:45
+83,Acil Tıp Teknisyeni,"30 kardiyak arrest vakası mevcut. Acil müdahale gerekli.",İstanbul/Bakırköy/Acil Servis,2024-01-16 05:00
+84,UMKE Personeli,"54 kişi spor kompleksinde mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Spor Merkezi,2024-01-16 05:15
+85,Hemşire,"38 multiple organ travması vakası var. Acil cerrahi gerekli.",İstanbul/Üsküdar/Hastane,2024-01-16 05:30
+86,AFAD Personeli,"46 kişi metro istasyonunda mahsur. Kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Metro İstasyonu,2024-01-16 05:45
+87,Saha Doktoru,"17 crush sendromu vakası tespit edildi. Acil diyaliz gerekli.",İstanbul/Şişli/Sağlık Merkezi,2024-01-16 06:00
+88,Acil Tıp Teknisyeni,"32 travmatik beyin hasarı vakası var. Nöroşirürji gerekli.",İstanbul/Bakırköy/Hastane,2024-01-16 06:15
+89,UMKE Personeli,"58 kişi iş merkezinde mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/İş Merkezi,2024-01-16 06:30
+90,Hemşire,"40 multiple travma vakası mevcut. Acil cerrahi gerekli.",İstanbul/Üsküdar/Acil Servis,2024-01-16 06:45
+91,AFAD Personeli,"60 kişi AVM'de mahsur. Ağır kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Büyük AVM,2024-01-16 07:00
+92,Saha Doktoru,"46 ezilme sendromu vakası var. Acil diyaliz gerekli.",İstanbul/Şişli/Hastane,2024-01-16 07:15
+93,Acil Tıp Teknisyeni,"34 kardiyopulmoner arrest vakası mevcut. Resüsitasyon gerekli.",İstanbul/Bakırköy/Acil Merkezi,2024-01-16 07:30
+94,UMKE Personeli,"62 kişi okul binasında mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Okul Kompleksi,2024-01-16 07:45
+95,Hemşire,"42 travmatik amputasyon vakası var. Acil cerrahi gerekli.",İstanbul/Üsküdar/Hastane,2024-01-16 08:00
+96,AFAD Personeli,"50 kişi rezidansta mahsur. Kurtarma ekipmanı gerekli.",İstanbul/Kadıköy/Lüks Rezidans,2024-01-16 08:15
+97,Saha Doktoru,"38 multiple travma vakası tespit edildi. Acil cerrahi gerekli.",İstanbul/Şişli/Tıp Merkezi,2024-01-16 08:30
+98,Acil Tıp Teknisyeni,"36 kafa travması vakası var. Nörolojik müdahale gerekli.",İstanbul/Bakırköy/Hastane,2024-01-16 08:45
+99,UMKE Personeli,"64 kişi üniversitede mahsur. Kurtarma ekibi gerekli.",İstanbul/Beşiktaş/Üniversite Kampüsü,2024-01-16 09:00
+100,Hemşire,"22 crush sendromu vakası mevcut. Acil diyaliz gerekli.",İstanbul/Üsküdar/Sağlık Kompleksi,2024-01-16 09:15 

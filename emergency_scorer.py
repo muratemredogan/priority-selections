@@ -1,0 +1,419 @@
+import pandas as pd
+import numpy as np
+import re
+from collections import Counter, defaultdict
+
+# Severity scores sözlüğü - Genişletilmiş versiyon
+severity_scores = {
+    # Kritik Durumlar (9-10 puan)
+    'crush sendromu': 10,
+    'ezilme sendromu': 10,
+    'kardiyopulmoner arrest': 10,
+    'kardiyak arrest': 10,
+    'solunum durması': 10,
+    'kalp durması': 10,
+    'beyin kanaması': 10,
+    'iç kanama': 10,
+    'akut solunum yetmezliği': 10,
+    'çoklu organ yetmezliği': 10,
+    'ağır kafa travması': 10,
+    'göçük altında': 10,
+    'enkaz altında': 10,
+    'masif kanama': 10,
+    'aort diseksiyonu': 10,
+    'akut miyokard enfarktüsü': 10,
+    'pnömotoraks': 10,
+    'hemotoraks': 10,
+    'kardiyojenik şok': 10,
+    'septik şok': 10,
+    'anafilaktik şok': 10,
+    
+    # Çok Ciddi Durumlar (8-9 puan)
+    'mahsur': 8,
+    'travmatik amputasyon': 9,
+    'travmatik beyin': 9,
+    'şok': 9,
+    'akut böbrek yetmezliği': 9,
+    'akut karaciğer yetmezliği': 9,
+    'status epileptikus': 9,
+    'meningeal kanama': 9,
+    'subdural hematom': 9,
+    'epidural hematom': 9,
+    'akut batın': 9,
+    'peritonit': 9,
+    'bağırsak perforasyonu': 9,
+    'akciğer embolisi': 9,
+    'kafa travması': 8,
+    'kafatası travması': 8,
+    'multiple travma': 8,
+    'çoklu organ travması': 8,
+    'multiple organ travması': 8,
+    'omurga yaralanması': 8,
+    'göğüs travması': 8,
+    'hipotermik': 8,
+    'elektrik çarpması': 8,
+    'yüksekten düşme': 8,
+    'vertebra kırığı': 8,
+    'pelvis kırığı': 8,
+    'femur kırığı': 8,
+    
+    # Ciddi Durumlar (7-8 puan)
+    'yanık': 7,
+    'açık kırık': 7,
+    '3. derece yanık': 7,
+    'zehirlenme': 7,
+    'kimyasal yanık': 7,
+    'akut psikoz': 7,
+    'intihar girişimi': 7,
+    'akut astım': 7,
+    'diyabetik ketoasidoz': 7,
+    'hipertansif kriz': 7,
+    'akut pankreatit': 7,
+    'akut kolanjit': 7,
+    'akut mezenter iskemi': 7,
+    
+    # Orta Şiddetli Durumlar (5-6 puan)
+    'kapalı kırık': 6,
+    'solunum sıkıntısı': 6,
+    '2. derece yanık': 6,
+    'bilinç bulanıklığı': 6,
+    'kısmi ampütasyon': 6,
+    'derin kesik': 6,
+    'akut apandisit': 6,
+    'akut kolesistit': 6,
+    'akut üst GIS kanama': 6,
+    'hipotermi': 5,
+    'hipoglisemi': 5,
+    'hiperglisemi': 5,
+    'dehidratasyon': 5,
+    'anjina': 5,
+    'aritmiler': 5,
+    'akut vertigo': 5,
+    
+    # Hafif-Orta Durumlar (3-4 puan)
+    'basit kırık': 4,
+    'yumuşak doku travması': 4,
+    'eklem çıkığı': 4,
+    '1. derece yanık': 4,
+    'yüzeysel kesik': 4,
+    'baş dönmesi': 4,
+    'hipertansiyon': 4,
+    'taşikardi': 4,
+    'bradikardi': 4,
+    'bulantı-kusma': 3,
+    'baş ağrısı': 3,
+    'karın ağrısı': 3,
+    'göğüs ağrısı': 3,
+    'sırt ağrısı': 3,
+    
+    # Hafif Durumlar (1-2 puan)
+    'burkulmalar': 2,
+    'sıyrıklar': 2,
+    'kontüzyon': 2,
+    'kas ağrısı': 2,
+    'eklem ağrısı': 2,
+    'hafif allerji': 2,
+    'ateş': 2,
+    'öksürük': 1,
+    'boğaz ağrısı': 1,
+    'ishal': 1,
+    'kabızlık': 1,
+    'yorgunluk': 1
+}
+
+# Ekipman öncelik sözlüğü
+equipment_priority = {
+    # Kritik Durumlar için Ekipmanlar
+    'crush sendromu': ['diyaliz ünitesi', 'diyaliz cihazı', 'monitör'],
+    'ezilme sendromu': ['diyaliz ünitesi', 'diyaliz cihazı', 'monitör'],
+    'kardiyopulmoner arrest': ['defibrilatör', 'resüsitasyon ekipmanı', 'entübasyon seti'],
+    'kardiyak arrest': ['defibrilatör', 'resüsitasyon ekipmanı', 'kardiyak monitör'],
+    'kalp durması': ['defibrilatör', 'resüsitasyon ekipmanı', 'kardiyak monitör'],
+    'solunum durması': ['entübasyon seti', 'oksijen tüpü', 'ventilatör'],
+    'beyin kanaması': ['beyin cerrahi seti', 'nöroşirürji ekipmanı', 'BT cihazı'],
+    'iç kanama': ['kan ürünü', 'cerrahi malzeme', 'ultrason cihazı'],
+    'akut solunum yetmezliği': ['ventilatör', 'oksijen tüpü', 'CPAP cihazı'],
+    'çoklu organ yetmezliği': ['yoğun bakım ünitesi', 'diyaliz cihazı', 'ventilatör'],
+    'masif kanama': ['kan ürünü', 'hızlı infüzyon pompası', 'cerrahi malzeme'],
+    'mahsur': ['kurtarma ekipmanı', 'termal kamera', 'kesme aletleri', 'jeneratör', 'aydınlatma sistemi'],
+    
+    # Çok Ciddi Durumlar için Ekipmanlar
+    'travmatik amputasyon': ['cerrahi ekipman', 'ameliyathane', 'mikrocerrahi seti'],
+    'travmatik beyin': ['nöroşirürji ekipmanı', 'beyin cerrahi ünitesi', 'BT cihazı'],
+    'şok': ['defibrilatör', 'monitör', 'infüzyon pompası'],
+    'akut böbrek yetmezliği': ['diyaliz ünitesi', 'kan gazı cihazı', 'monitör'],
+    'status epileptikus': ['antiepileptik ilaçlar', 'monitör', 'oksijen desteği'],
+    'subdural hematom': ['nöroşirürji ekipmanı', 'BT cihazı', 'cerrahi set'],
+    
+    # Ciddi Travmalar için Ekipmanlar
+    'kafa travması': ['nöroşirürji ekipmanı', 'nörolojik müdahale ekipmanı', 'BT cihazı'],
+    'multiple travma': ['cerrahi malzeme', 'acil tıbbi malzeme', 'travma seti'],
+    'omurga yaralanması': ['stabilizasyon ekipmanı', 'görüntüleme cihazı', 'cerrahi set'],
+    'göğüs travması': ['göğüs tüpü seti', 'oksijen desteği', 'monitör'],
+    'pelvis kırığı': ['pelvik stabilizatör', 'röntgen cihazı', 'cerrahi set'],
+    
+    # Yanık ve Zehirlenme Durumları için Ekipmanlar
+    'yanık': ['yanık tedavi ünitesi', 'steril pansuman', 'sıvı resüsitasyon seti'],
+    '3. derece yanık': ['yanık tedavi ünitesi', 'debridman seti', 'greft ekipmanı'],
+    'kimyasal yanık': ['dekontaminasyon ünitesi', 'göz yıkama seti', 'koruyucu ekipman'],
+    'zehirlenme': ['antidot seti', 'mide lavaj seti', 'aktif kömür'],
+    
+    # Solunum ve Kardiyak Durumlar için Ekipmanlar
+    'akut astım': ['nebulizatör', 'oksijen tüpü', 'pulse oksimetre'],
+    'pnömotoraks': ['göğüs tüpü seti', 'vakum sistemi', 'röntgen cihazı'],
+    'hemotoraks': ['göğüs tüpü seti', 'kan ürünü', 'ultrason cihazı'],
+    
+    # Kurtarma Durumları için Ekipmanlar
+    'göçük altında': ['kurtarma ekipmanı', 'termal kamera', 'kesme aletleri'],
+    'enkaz altında': ['kurtarma ekipmanı', 'termal kamera', 'dinleme cihazı'],
+    'yüksekten düşme': ['travma tahtası', 'boyunluk', 'stabilizasyon ekipmanı']
+}
+
+class EmergencyQLearning:
+    def __init__(self, learning_rate=0.1, discount_factor=0.95, epsilon=0.1):
+        self.q_table = defaultdict(lambda: defaultdict(float))
+        self.learning_rate = learning_rate
+        self.discount_factor = discount_factor
+        self.epsilon = epsilon
+        self.episode_count = 0
+        
+    def get_state_features(self, conditions, location):
+        """Durumları ve konum özelliklerini birleştirerek state oluştur"""
+        features = []
+        total_severity = 0
+        max_severity = 0
+        total_count = 0
+        
+        # Durum özellikleri
+        for condition, count in conditions.items():
+            severity = severity_scores.get(condition, 0)
+            total_severity += severity * count
+            max_severity = max(max_severity, severity)
+            total_count += count
+            features.extend([count, severity])
+        
+        # Özet özellikler
+        features.extend([total_severity, max_severity, total_count])
+        
+        # Konum özellikleri
+        location_lower = location.lower()
+        location_type = 0  # Varsayılan
+        if 'avm' in location_lower:
+            location_type = 1
+        elif 'gökdelen' in location_lower or 'plaza' in location_lower or 'rezidans' in location_lower:
+            location_type = 2
+        elif 'metro' in location_lower:
+            location_type = 3
+        elif 'okul' in location_lower or 'kreş' in location_lower or 'üniversite' in location_lower:
+            location_type = 4
+            
+        features.append(location_type)
+        return tuple(features)
+    
+    def get_action(self, state_features, conditions):
+        """Epsilon-greedy politikası ile aksiyon seç"""
+        if np.random.random() < max(0.01, self.epsilon / (1 + self.episode_count * 0.005)):
+            # Keşif: Mevcut durumlarla ilgili ekipmanlar arasından seç
+            possible_actions = set()
+            for condition in conditions.keys():
+                if condition in equipment_priority:
+                    possible_actions.add(condition)
+            if possible_actions:
+                return np.random.choice(list(possible_actions))
+            return np.random.choice(list(equipment_priority.keys()))
+        
+        # Sömürü: En yüksek Q-değerine sahip aksiyonu seç
+        state_actions = self.q_table[state_features]
+        if not state_actions:
+            # Eğer durum daha önce görülmediyse, mevcut durumlarla ilgili ekipmanlardan birini seç
+            possible_actions = set()
+            for condition in conditions.keys():
+                if condition in equipment_priority:
+                    possible_actions.add(condition)
+            if possible_actions:
+                return np.random.choice(list(possible_actions))
+            return np.random.choice(list(equipment_priority.keys()))
+        
+        return max(state_actions.items(), key=lambda x: x[1])[0]
+    
+    def get_reward(self, conditions, action, location):
+        """Seçilen aksiyonun ödülünü hesapla"""
+        total_reward = 0
+        action_base_reward = 0
+        location_multiplier = 1.0
+        
+        # Durum bazlı ödüller
+        for condition, count in conditions.items():
+            severity = severity_scores.get(condition, 0)
+            if condition == action:
+                # Doğru ekipman seçimi için bonus
+                action_base_reward = count * severity * 3
+            total_reward += count * severity
+        
+        # Konum bazlı ödül çarpanı
+        location_lower = location.lower()
+        if 'avm' in location_lower:
+            location_multiplier = 1.3
+        elif 'gökdelen' in location_lower or 'plaza' in location_lower or 'rezidans' in location_lower:
+            location_multiplier = 1.4
+        elif 'metro' in location_lower:
+            location_multiplier = 1.3
+        elif 'okul' in location_lower or 'kreş' in location_lower or 'üniversite' in location_lower:
+            location_multiplier = 1.2
+            
+        # Ekipman uygunluğu kontrolü
+        if action in equipment_priority:
+            matching_conditions = sum(1 for condition in conditions if condition == action)
+            if matching_conditions > 0:
+                total_reward += action_base_reward * location_multiplier
+            else:
+                total_reward -= 100  # Yanlış ekipman seçimi için daha yüksek ceza
+        
+        return total_reward
+    
+    def update(self, state_features, action, reward, next_state_features):
+        """Q-değerlerini güncelle"""
+        if next_state_features in self.q_table and self.q_table[next_state_features]:
+            next_max_q = max(self.q_table[next_state_features].values())
+        else:
+            next_max_q = 0
+            
+        current_q = self.q_table[state_features][action]
+        # Q-learning güncelleme formülü: Q(s,a) = Q(s,a) + α[R + γ*max(Q(s',a')) - Q(s,a)]
+        new_q = current_q + self.learning_rate * (reward + self.discount_factor * next_max_q - current_q)
+        self.q_table[state_features][action] = new_q
+        
+    def train_episode(self):
+        """Bir eğitim episodunu tamamla"""
+        self.episode_count += 1
+        # Epsilon değerini zamanla azalt
+        self.epsilon = max(0.01, self.epsilon * 0.995)
+
+def calculate_urgency_score(count, severity, location):
+    """NumPy kullanarak aciliyet puanını hesapla"""
+    base_score = np.multiply(count, severity)
+    
+    # Konum bazlı ek puanlar
+    location_lower = location.lower()
+    location_multiplier = 1.0  # Varsayılan çarpan
+    
+    if 'avm' in location_lower:
+        location_multiplier = 1.3  # %30 daha fazla
+    elif 'gökdelen' in location_lower or 'plaza' in location_lower or 'rezidans' in location_lower:
+        location_multiplier = 1.4  # %40 daha fazla
+    elif 'metro' in location_lower:
+        location_multiplier = 1.3  # %30 daha fazla
+    elif 'okul' in location_lower or 'kreş' in location_lower or 'üniversite' in location_lower:
+        location_multiplier = 1.2  # %20 daha fazla
+    elif 'hastane' in location_lower:
+        location_multiplier = 1.0  # Hastaneler için ek puan yok
+        
+    return base_score * location_multiplier
+
+def analyze_emergency_messages(file_path):
+    # CSV dosyasını oku
+    df = pd.read_csv(file_path)
+    
+    # Q-learning ajanını başlat
+    q_agent = EmergencyQLearning()
+    
+    # Eğitim döngüsü
+    for _ in range(100):  # 100 episode boyunca eğit
+        q_agent.train_episode()
+        
+        # Her mesajı analiz et ve puanla
+        results = []
+        for _, row in df.iterrows():
+            message = row['acil_durum_mesajı'].lower()
+            location = row['konum']
+            detected_conditions = {}
+            scores = []
+            
+            # Mesajdaki acil durumları tespit et
+            for condition, severity in severity_scores.items():
+                pattern = r'(\d+)\s+' + condition
+                matches = re.findall(pattern, message)
+                if matches:
+                    count = np.sum([int(x) for x in matches])
+                    score = calculate_urgency_score(count, severity, location)
+                    scores.append(score)
+                    detected_conditions[condition] = int(count)
+            
+            if detected_conditions:
+                # Q-learning ile en uygun aksiyonu seç
+                state_features = q_agent.get_state_features(detected_conditions, location)
+                action = q_agent.get_action(state_features, detected_conditions)
+                reward = q_agent.get_reward(detected_conditions, action, location)
+                
+                # Q-değerlerini güncelle
+                next_state_features = state_features  # Basitlik için aynı state'i kullan
+                q_agent.update(state_features, action, reward, next_state_features)
+                
+                total_score = np.sum(scores)
+                results.append({
+                    'mesaj_id': row['mesaj_id'],
+                    'konum': row['konum'],
+                    'gönderen_rol': row['gönderen_rol'],
+                    'tarih_saat': row['tarih_saat'],
+                    'mesaj': row['acil_durum_mesajı'],
+                    'puan': int(total_score),
+                    'durumlar': detected_conditions,
+                    'önerilen_aksiyon': action,
+                    'q_değeri': q_agent.q_table[state_features][action],
+                    'konum_tipi': 'AVM' if 'avm' in location.lower() else 
+                                'Gökdelen' if any(x in location.lower() for x in ['gökdelen', 'plaza', 'rezidans']) else
+                                'Metro' if 'metro' in location.lower() else
+                                'Okul' if any(x in location.lower() for x in ['okul', 'kreş', 'üniversite']) else
+                                'Hastane' if 'hastane' in location.lower() else 'Diğer'
+                })
+    
+    # NumPy kullanarak sonuçları sırala
+    results = np.array(results, dtype=object)
+    sorted_indices = np.argsort([-r['puan'] for r in results])
+    results = results[sorted_indices]
+    
+    print("\n=== ACİL DURUM ÖNCELİK SIRASI VE EKİPMAN İHTİYAÇLARI (Q-LEARNING) ===\n")
+    
+    # İstatistiksel özet
+    scores = np.array([r['puan'] for r in results])
+    print(f"İstatistiksel Özet:")
+    print(f"Toplam Vaka Sayısı: {len(scores)}")
+    print(f"Ortalama Aciliyet Puanı: {np.mean(scores):.2f}")
+    print(f"Medyan Aciliyet Puanı: {np.median(scores):.2f}")
+    print(f"Standart Sapma: {np.std(scores):.2f}")
+    print(f"Minimum Puan: {np.min(scores)}")
+    print(f"Maksimum Puan: {np.max(scores)}")
+    print("-" * 80 + "\n")
+    
+    # Konum tipine göre istatistikler
+    print("Konum Tipine Göre İstatistikler:")
+    location_types = np.unique([r['konum_tipi'] for r in results])
+    for loc_type in location_types:
+        loc_scores = [r['puan'] for r in results if r['konum_tipi'] == loc_type]
+        if loc_scores:
+            print(f"\n{loc_type}:")
+            print(f"  Vaka Sayısı: {len(loc_scores)}")
+            print(f"  Ortalama Puan: {np.mean(loc_scores):.2f}")
+            print(f"  Maksimum Puan: {np.max(loc_scores)}")
+    print("-" * 80 + "\n")
+    
+    # En yüksek puanlı 10 durumu yazdır
+    for i, result in enumerate(results[:10], 1):
+        print(f"{i}. Öncelik:")
+        print(f"Mesaj ID: {result['mesaj_id']}")
+        print(f"Konum: {result['konum']} ({result['konum_tipi']})")
+        print(f"Gönderen: {result['gönderen_rol']}")
+        print(f"Tarih/Saat: {result['tarih_saat']}")
+        print(f"Mesaj: {result['mesaj']}")
+        print(f"Aciliyet Puanı: {result['puan']}")
+        print(f"Q-Learning Önerisi: {result['önerilen_aksiyon']} (Q-değeri: {result['q_değeri']:.2f})")
+        print("Tespit Edilen Durumlar ve Gerekli Ekipmanlar:")
+        
+        for condition, count in result['durumlar'].items():
+            print(f"  - {count} {condition}")
+            if condition in equipment_priority:
+                print(f"    Gerekli Ekipmanlar: {', '.join(equipment_priority[condition])}")
+        print("-" * 80)
+
+if __name__ == "__main__":
+    analyze_emergency_messages("acil_durum_mesajlari.csv") 
